@@ -66,7 +66,36 @@ end if
 ```
 
 ```SQL
-교재 185쪽(그림 5.8)
+–– Registers a student after ensuring classroom capacity is not exceeded
+–– Returns 0 on success, and -1 if capacity is exceeded.
+create function registerStudent(
+  in s id varchar(5),
+  in s courseid varchar (8),
+  in s secid varchar (8),
+  in s semester varchar (6),
+  in s year numeric (4,0),
+  out errorMsg varchar(100))
+  returns integer
+begin
+  declare currEnrol int;
+  select count(*) into currEnrol
+    from takes
+    where course id = s courseid and sec id = s secid
+      and semester = s semester and year = s year;
+  declare limit int;
+  select capacity into limit
+    from classroom natural join section
+    where course id = s courseid and sec id = s secid
+      and semester = s semester and year = s year;
+  if (currEnrol < limit)
+    begin
+      insert into takes values (s id, s courseid, s secid, s semester, s year, null);
+      return(0);
+    end
+  –– Otherwise, section capacity limit already reached
+  set errorMsg = ’Enrollment limit reached for course ’ || s courseid || ’ section ’ || s secid;
+  return(-1);
+end;
 ```
 
 ```SQL
