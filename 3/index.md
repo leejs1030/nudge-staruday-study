@@ -28,8 +28,52 @@ SQL:1999 에서 추가된 내용이다.
 PSM덕분에, SQL에서도 범용 프로그래밍 언어에서 가능하던 대부분의 기능을 구현할 수 있게 되었다.
 이러한 절차적 확장이 적용된 SQL들은 튜링 완전하다고 볼 수 있다.
 
-- 예시 삽입 예정
+아래는 PSM의 문법 혹은 사용 예시들이다.
+```SQL
+WHILE (boolean experssion) do
+  (sequence of statements);
+END WHILE
+```
+```SQL
+REPEAT
+  (sequence of statements);
+UNTIL (boolean expresssion)
+END REPEAT
+```
+while과 repeat문은 일반적인 루프를 위해 사용될 수 있다.
+```SQL
+DECLARE n INTEGER default 0;
+FOR r AS
+  SELECT budget FROM department
+  WHERE dept_name = 'MUSIC'
+DO
+  SET n = n - r.budget
+END FOR
+```
+for문은 프로그램의 질의 결과를 가지고 반복문을 돌리는 데 사용할 수 있다.
+leave문은 break처럼, iterate문은 continue처럼 사용할 수 있다.
+반복문들을 하나의 트랜잭션 안에서 사용하고 싶다면, begin atomic ... end로 묶어주면 된다.
+```SQL
+if (boolean expression)
+  then (statement or compound statement)
+ elseif (boolean expression)
+  then (statement or compound statement)
+else (statement or compound statement)
+end if
+```
 
+```SQL
+교재 185쪽(그림 5.8)
+```
+
+```SQL
+DECLARE out_of_classroom_seats CONDITION
+DECLARE EXIT BUNDLER FOR out_of_classroom_seats
+BEGIN
+  (sequence of statements);
+END
+```
+미리 정의된 예외처리들: sqlexception, sqlwarning, not found
 
 
 ##### 재귀
