@@ -108,6 +108,8 @@ recursion과 관련된 내용에 대한 내용은 다음 주에 더 공부하고
 
 [자주 실행되는 느린 쿼리에 대해 prepared statement을 저장한 후의 성능이 개선된 경우](https://orangematter.solarwinds.com/2014/11/19/analyzing-prepared-statement-performance/)
 
+해당 부분은 그 외sql 튜닝 스터디 교재 1장에서 나오는 내용이 더 자세하고 좋아 보여 생락하였습니다..
+
 
 
 
