@@ -91,6 +91,8 @@ DECLARE CONTINUE HANDLER도 가능하다. EXIT HANDLER는 실행 중 오류 발�
 미리 정의된 예외처리들: sqlexception, sqlwarning, not found
 https://dev.mysql.com/doc/refman/8.0/en/declare-handler.html
 
+다만, SQL표준으로 등록되어있음에도, 이를 구현하는 것은 선택사항이다. 또한, 표준이 나오기 이전부터 많은 DBMS들이 해당 기능의 필요성을 느껴서 자체적으로 제작을 마쳤었다. 그리고 이 자체적인 기능들은 표준이 없었기에, 기능은 비슷해도 문법은 제각각이었고, 표준이 제정된 이후로도 바뀌지 않았다. 따라서 프로시저나 함수 등을 정의하려먼 각 SQL 별로 상세 문법에 대해서 더 파악해야할 필요성이 있다.
+
 
 ##### 재귀
 PostgreSQL에서는 튜링 완전성을 가짐을 증명하기 위해 재귀를 사용한다.
