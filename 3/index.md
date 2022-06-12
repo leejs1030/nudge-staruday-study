@@ -29,6 +29,9 @@ PSM덕분에, SQL에서도 범용 프로그래밍 언어에서 가능하던 대�
 이러한 절차적 확장이 적용된 SQL들은 튜링 완전하다고 볼 수 있다.
 
 아래는 PSM의 문법 혹은 사용 예시들이다.
+
+변수는 declare문을 사용하며, 유효한 SQL타입을 모두 사용 가능하다.
+
 ```SQL
 WHILE (boolean experssion) do
   (sequence of statements);
@@ -68,12 +71,25 @@ end if
 
 ```SQL
 DECLARE out_of_classroom_seats CONDITION
-DECLARE EXIT BUNDLER FOR out_of_classroom_seats
+DECLARE EXIT HANDLER FOR out_of_classroom_seats
 BEGIN
   (sequence of statements);
 END
+
+
+DECLARE CONTINUE HANDLER FOR 1051
+BEGIN
+  (sequence of statements);
+END;
+
+DECLARE CONTINUE HANDLER FOR SQLWARNING
+BEGIN
+  (sequence of statements);
+END;
 ```
+DECLARE CONTINUE HANDLER도 가능하다. EXIT HANDLER는 실행 중 오류 발생 시 begin-end문을 빠져나가며, CONTINUE HANLDER는 오류가 발생한 다음 문장을 계속해서 수행한다.
 미리 정의된 예외처리들: sqlexception, sqlwarning, not found
+https://dev.mysql.com/doc/refman/8.0/en/declare-handler.html
 
 
 ##### 재귀
@@ -96,6 +112,8 @@ recursion과 관련된 내용에 대한 내용은 다음 주에 더 공부하고
 
 
 
-### aggregate function & window function
+### 고급 집계 기능
 순위를 알려주는 rank, percent_rank 등이 있었다.
 한 테이블을 파티션별로 분할헤서 aggregate, window function 등을 적용할 수도 있었다.
+window function은 mysql 8버전부터 지원하는 부분들이라서, 미국 캐시워크의 버전으로는 수행해볼 수 없었다.
+이 부분도 다움주에 더 공부하고 다루겠습니다...
